@@ -63,6 +63,7 @@ def filter_orders_and_create_report(json_file_path, start_date, end_date, min_co
                 # Преобразование статуса только после прохождения фильтра
                 order['status'] = status_rename_map.get(order['status'], order['status'])
                 filtered_orders.append(order)
+                order['code'] = order['code']['code']
     
     # Создание DataFrame
     df = pd.DataFrame(filtered_orders)
@@ -72,7 +73,8 @@ def filter_orders_and_create_report(json_file_path, start_date, end_date, min_co
         'created_at': 'Дата',
         'order_number': 'Номер заказа',
         'status': 'Статус',
-        'total_cost': 'Сумма'
+        'total_cost': 'Сумма',
+        'code': 'Промокод'
     }, inplace=True)
     
     # Формирование названия файла отчета
